@@ -1,0 +1,174 @@
+dev:
+  STACKNAME:                      "lfg-ahq-commdm-awsglue-tgt-fct-comm-agent-trans-dev"   ## name should start with lfg-glue-spark-etl-<NAME>
+  GlueServiceRole:                "lfg-glue-service-role"       ## Glue Service Role
+  PythonVersion:                  "3"                           ## Python Version 3 recommended
+  project:                        "AHQ-glue"                    ## Project name
+  team:                           "cloudops"                    ##do not change
+  ScriptLocation:                 "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/dev/lfg_ahq_commdm_awsglue_tgt_fct_comm_agent_trans.py"  # Complete path of Python Script
+  extrapyfiles:                   "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/dev/pg8000.zip,s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/dev/connect.zip"   # extra PY files, comma separated if more than 1
+  destinationbucket:              "s3://lfg-151324446874-glue-temp-ue1-bucket001/pyspark/dev"       #Destination Bucket for output *Required
+  environment:                    "dev"                                                             # dev, test, prod
+  gluedbcredsecret:               "dds/glue-oracle"                                                 # should pre-exist, check with WH
+  gluetgtdbcredsecret:            "dds/glue-redshift"                                               # should pre-exist, check with WH
+  GlueVersion:                    "2.0"                                                             # do no change
+  costcenter:                     "C01322"                                                          # DSU /CostCenter
+  MaxConcurrentRuns:              "12"          #Refer documentation, this is default
+  MaxRetries:                     "0"          #Refer documentation, this is default
+  sparkeventlogspath:             "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/dev/log"    #Need to specify Logs path on S3 bucket
+  WorkerType:                     "Standard"                          #Refer to doc. Number of workers and WorkerType have dependency
+  NumberOfWorkers:                 "3"                                
+  paramfilename:                   "param_load_adr_comm_mart_from_imp_ods.json"
+  rsschemaname:                    "sa_adr_dw"
+  odsschemaname:                   "sa_adr_ods"
+  confsubdir:                      "pyspark/dev/"
+  confbucketname:                  "lfg-151324446874-glue-library-ue1-bucket001,lfg-151324446874-glue-config-ue1-bucket001"
+  conffilename:                    "fact_comm_agent_trans.json,redshift-ca-bundle.pem"
+  rsdbtgttblname:                  "sa_adr_dw.fct_comm_agent_trans"
+  rsdbdatabase:                    "rds_ahq_redshift_dev"
+  rscatalogconn:                   "lfg-glue-redshift-cluster-jdbc-connections-redshift-lfgannuties001-JDBC-AZ1"
+  rscatalogtablename:              "tgt_lfgannuties001_sa_adr_dw_fct_comm_agent_trans"
+  rscatalogdatabase:               "lfgannuties001"
+  rssecretname:                    "dds/glue-redshift-dev"
+  orajdbcdrivername:               "oracle.jdbc.OracleDriver"
+  odssecretname:                   "dds/glue-oracle-dev"
+
+test:
+  STACKNAME:                      "lfg-ahq-commdm-awsglue-tgt-fct-comm-agent-trans-qa"
+  Description:                    "$CI_PROJECT_URL PIPELINE ID: $CI_PIPELINE_ID for AWS Glue Spark ETL Job and Ecosystem"
+  GlueServiceRole:                "lfg-glue-service-role"
+  PythonVersion:                  "3"
+  project:                        "AHQ-glue"
+  team:                           "cloudops"
+  ScriptLocation:                 "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/qa/lfg_ahq_commdm_awsglue_tgt_fct_comm_agent_trans.py"  # Complete path of Python Script
+  extrapyfiles:                   "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/qa/pg8000.zip,s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/qa/connect.zip"   # extra PY files, comma separated if more than 1
+  destinationbucket:              "s3://lfg-151324446874-glue-temp-ue1-bucket001/pyspark/qa"       #Destination Bucket for output *Required
+  environment:                    "qa"
+  gluedbcredsecret:               "dds/glue-oracle"                                                 # should pre-exist, check with WH
+  gluetgtdbcredsecret:            "dds/glue-redshift"                                               # should pre-exist, check with WH
+  GlueVersion:                    "2.0"                                                             # do no change
+  costcenter:                     "C01322"                                                          # DSU /CostCenter
+  MaxConcurrentRuns:              "12"          #Refer documentation, this is default
+  MaxRetries:                     "0"          #Refer documentation, this is default
+  sparkeventlogspath:             "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/qa/log"    #Need to specify Logs path on S3 bucket
+  WorkerType:                     "Standard"                          #Refer to doc. Number of workers and WorkerType have dependency
+  NumberOfWorkers:                 "3"                                
+  paramfilename:                   "param_load_adr_comm_mart_from_imp_ods.json"
+  rsschemaname:                    "sa_adr_dw"
+  odsschemaname:                   "sa_adr_ods"
+  confsubdir:                      "pyspark/qa/"
+  confbucketname:                  "lfg-151324446874-glue-library-ue1-bucket001,lfg-151324446874-glue-config-ue1-bucket001"
+  conffilename:                    "fact_comm_agent_trans.json,redshift-ca-bundle.pem"
+  rsdbtgttblname:                  "sa_adr_dw.fct_comm_agent_trans"
+  rsdbdatabase:                    "rds_ahq_redshift_qa"
+  rscatalogconn:                   "lfg-glue-redshift-cluster-jdbc-connections-qa-redshift-lfgannuities002-JDBC-AZ1"
+  rscatalogtablename:              "tgt_lfgannuities002_sa_adr_dw_fct_comm_agent_trans"
+  rscatalogdatabase:               "lfgannuities002"
+  rssecretname:                    "dds/glue-redshift-qa"
+  orajdbcdrivername:               "oracle.jdbc.OracleDriver"
+  odssecretname:                   "dds/glue-oracle-qa"                               
+
+uat:
+  STACKNAME:                      "lfg-ahq-commdm-awsglue-tgt-fct-comm-agent-trans-uat"
+  Description:                    "$CI_PROJECT_URL PIPELINE ID: $CI_PIPELINE_ID for AWS Glue Spark ETL Job and Ecosystem"
+  GlueServiceRole:                "lfg-glue-service-role"
+  PythonVersion:                  "3"
+  project:                        "AHQ-glue"
+  team:                           "cloudops"
+  ScriptLocation:                 "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/uat/lfg_ahq_commdm_awsglue_tgt_fct_comm_agent_trans.py"  # Complete path of Python Script
+  extrapyfiles:                   "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/uat/pg8000.zip,s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/uat/connect.zip"   # extra PY files, comma separated if more than 1
+  destinationbucket:              "s3://lfg-151324446874-glue-temp-ue1-bucket001/pyspark/uat"       #Destination Bucket for output *Required
+  environment:                    "uat"
+  gluedbcredsecret:               "dds/glue-oracle"                                                 # should pre-exist, check with WH
+  gluetgtdbcredsecret:            "dds/glue-redshift"                                               # should pre-exist, check with WH
+  GlueVersion:                    "2.0"                                                             # do no change
+  costcenter:                     "C01322"                                                          # DSU /CostCenter
+  MaxConcurrentRuns:              "60"          #Refer documentation, this is default
+  MaxRetries:                     "0"          #Refer documentation, this is default
+  sparkeventlogspath:             "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/uat/log"    #Need to specify Logs path on S3 bucket
+  WorkerType:                     "Standard"                          #Refer to doc. Number of workers and WorkerType have dependency
+  NumberOfWorkers:                 "10"                                
+  paramfilename:                   "param_load_adr_comm_mart_from_imp_ods.json"
+  rsschemaname:                    "sa_adr_dw"
+  odsschemaname:                   "sa_adr_ods_u1"
+  confsubdir:                      "pyspark/uat/"
+  confbucketname:                  "lfg-151324446874-glue-library-ue1-bucket001,lfg-151324446874-glue-config-ue1-bucket001"
+  conffilename:                    "fact_comm_agent_trans.json,redshift-ca-bundle.pem"
+  rsdbtgttblname:                  "sa_adr_dw.fct_comm_agent_trans"
+  rsdbdatabase:                    "rds_ahq_redshift_uat"
+  rscatalogconn:                   "lfg-glue-redshift-cluster-jdbc-connections-uat-redshift-lfgannuities003-JDBC-AZ1"
+  rscatalogtablename:              "tgt_lfgannuities003_sa_adr_dw_fct_comm_agent_trans"
+  rscatalogdatabase:               "lfgannuities003"
+  rssecretname:                    "dds/glue-redshift-uat"
+  orajdbcdrivername:               "oracle.jdbc.OracleDriver"
+  odssecretname:                   "dds/glue-oracle-uat"                               
+
+preprod:
+  STACKNAME:                      "lfg-ahq-commdm-awsglue-tgt-fct-comm-agent-trans-preprod"
+  Description:                    "$CI_PROJECT_URL PIPELINE ID: $CI_PIPELINE_ID for AWS Glue Spark ETL Job and Ecosystem"
+  GlueServiceRole:                "lfg-glue-service-role"
+  PythonVersion:                  "3"
+  project:                        "AHQ-glue"
+  team:                           "cloudops"
+  ScriptLocation:                 "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/preprod/lfg_ahq_commdm_awsglue_tgt_fct_comm_agent_trans.py"  # Complete path of Python Script
+  extrapyfiles:                   "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/preprod/pg8000.zip,s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/preprod/connect.zip"   # extra PY files, comma separated if more than 1
+  destinationbucket:              "s3://lfg-151324446874-glue-temp-ue1-bucket001/pyspark/preprod"       #Destination Bucket for output *Required
+  environment:                    "preprod"
+  gluedbcredsecret:               "dds/glue-oracle"                                                 # should pre-exist, check with WH
+  gluetgtdbcredsecret:            "dds/glue-redshift"                                               # should pre-exist, check with WH
+  GlueVersion:                    "2.0"                                                             # do no change
+  costcenter:                     "C01322"                                                          # DSU /CostCenter
+  MaxConcurrentRuns:              "68"          #Refer documentation, this is default
+  MaxRetries:                     "0"          #Refer documentation, this is default
+  sparkeventlogspath:             "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/preprod/log"    #Need to specify Logs path on S3 bucket
+  WorkerType:                     "Standard"                          #Refer to doc. Number of workers and WorkerType have dependency
+  NumberOfWorkers:                 "10"                                
+  paramfilename:                   "param_load_adr_comm_mart_from_imp_ods.json"
+  rsschemaname:                    "sa_adr_dw"
+  odsschemaname:                   "sa_adr_ods"
+  confsubdir:                      "pyspark/preprod/"
+  confbucketname:                  "lfg-151324446874-glue-library-ue1-bucket001,lfg-151324446874-glue-config-ue1-bucket001"
+  conffilename:                    "fact_comm_agent_trans.json,redshift-ca-bundle.pem"
+  rsdbtgttblname:                  "sa_adr_dw.fct_comm_agent_trans"
+  rsdbdatabase:                    "rds_ahq_redshift_preprod"
+  rscatalogconn:                   "lfg-glue-redshift-cluster-jdbc-connections-preprod-redshift-lfgannuities004-JDBC-AZ1"
+  rscatalogtablename:              "tgt_lfgannuities004_sa_adr_dw_fct_comm_agent_trans"
+  rscatalogdatabase:               "lfgannuities004"
+  rssecretname:                    "dds/glue-redshift-preprod"
+  orajdbcdrivername:               "oracle.jdbc.OracleDriver"
+  odssecretname:                   "dds/glue-oracle-preprod"
+
+prod:
+  STACKNAME:                      "lfg-ahq-commdm-awsglue-tgt-fct-comm-agent-trans"
+  Description:                    "$CI_PROJECT_URL PIPELINE ID: $CI_PIPELINE_ID for AWS Glue Spark ETL Job and Ecosystem"
+  GlueServiceRole:                "lfg-glue-service-role"
+  PythonVersion:                  "3"
+  project:                        "AHQ-glue"
+  team:                           "cloudops"
+  ScriptLocation:                 "s3://lfg-620962404398-glue-scripts-ue1-bucket001/pyspark/prod/lfg_ahq_commdm_awsglue_tgt_fct_comm_agent_trans.py"  # Complete path of Python Script
+  extrapyfiles:                   "s3://lfg-620962404398-glue-library-ue1-bucket001/pyspark/prod/pg8000.zip,s3://lfg-620962404398-glue-library-ue1-bucket001/pyspark/prod/connect.zip"   # extra PY files, comma separated if more than 1
+  destinationbucket:              "s3://lfg-620962404398-glue-temp-ue1-bucket001/pyspark/prod"       #Destination Bucket for output *Required
+  environment:                    "prod"
+  gluedbcredsecret:               "dds/glue-oracle"                                                 # should pre-exist, check with WH
+  gluetgtdbcredsecret:            "dds/glue-redshift"                                               # should pre-exist, check with WH
+  GlueVersion:                    "2.0"                                                             # do no change
+  costcenter:                     "C01322"                                                          # DSU /CostCenter
+  MaxConcurrentRuns:              "68"          #Refer documentation, this is default
+  MaxRetries:                     "0"          #Refer documentation, this is default
+  sparkeventlogspath:             "s3://lfg-620962404398-glue-library-ue1-bucket001/pyspark/prod/log"    #Need to specify Logs path on S3 bucket
+  WorkerType:                     "Standard"                          #Refer to doc. Number of workers and WorkerType have dependency
+  NumberOfWorkers:                 "10"                                
+  paramfilename:                   "param_load_adr_comm_mart_from_imp_ods.json"
+  rsschemaname:                    "sa_adr_dw"
+  odsschemaname:                   "sa_adr_ods"
+  confsubdir:                      "pyspark/prod/"
+  confbucketname:                  "lfg-620962404398-glue-library-ue1-bucket001,lfg-620962404398-glue-config-ue1-bucket001"
+  conffilename:                    "fact_comm_agent_trans.json,redshift-ca-bundle.pem"
+  rsdbtgttblname:                  "sa_adr_dw.fct_comm_agent_trans"
+  rsdbdatabase:                    "rds_ahq_redshift_prod"
+  rscatalogconn:                   "lfg-glue-redshift-cluster-jdbc-connections-prod-redshift-lfgannuities005-JDBC-AZ1"
+  rscatalogtablename:              "tgt_lfgannuities005_sa_adr_dw_fct_comm_agent_trans"
+  rscatalogdatabase:               "lfgannuities005"
+  rssecretname:                    "dds/glue-redshift-prod"
+  orajdbcdrivername:               "oracle.jdbc.OracleDriver"
+  odssecretname:                   "dds/glue-oracle-prod"
+
