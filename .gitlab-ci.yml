@@ -1,0 +1,43 @@
+include:
+  - project: 'eDevOps/cicd'
+    ref: 'feature-aws-glue'
+    file: 'AWS-Glue/pyspark-template-classic-ahq.yml'
+  #- project: 'eDevOps/cicd'
+  #  ref:  master
+  #  file: '/Quality-gate-check/root.yml'
+
+variables:
+    s3PysparkScriptBucket:      "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/dev/"
+    s3PysparkLibBucket:         "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/dev/"
+    s3PysparkConfigBucket:      "s3://lfg-151324446874-glue-config-ue1-bucket001/pyspark/dev/"
+    s3PysparkInputBucket:       "s3://lfg-151324446874-glue-input-ue1-bucket001/pyspark/dev/"
+
+    s3PysparkScriptBucket_qa:    "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/qa/"
+    s3PysparkLibBucket_qa:       "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/qa/"
+    s3PysparkConfigBucket_qa:    "s3://lfg-151324446874-glue-config-ue1-bucket001/pyspark/qa/"
+    s3PysparkInputBucket_qa:     "s3://lfg-151324446874-glue-input-ue1-bucket001/pyspark/qa/"
+
+    s3PysparkScriptBucket_uat:   "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/uat/"
+    s3PysparkLibBucket_uat:      "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/uat/"
+    s3PysparkConfigBucket_uat:   "s3://lfg-151324446874-glue-config-ue1-bucket001/pyspark/uat/"
+    s3PysparkInputBucket_uat:    "s3://lfg-151324446874-glue-input-ue1-bucket001/pyspark/uat/"
+
+    s3PysparkScriptBucket_preprod:   "s3://lfg-151324446874-glue-scripts-ue1-bucket001/pyspark/preprod/"
+    s3PysparkLibBucket_preprod:      "s3://lfg-151324446874-glue-library-ue1-bucket001/pyspark/preprod/"
+    s3PysparkConfigBucket_preprod:   "s3://lfg-151324446874-glue-config-ue1-bucket001/pyspark/preprod/"
+    s3PysparkInputBucket_preprod:    "s3://lfg-151324446874-glue-input-ue1-bucket001/pyspark/preprod/"
+
+    s3PysparkScriptBucket_prod:  "s3://lfg-620962404398-glue-scripts-ue1-bucket001/pyspark/prod/"
+    s3PysparkLibBucket_prod:     "s3://lfg-620962404398-glue-library-ue1-bucket001/pyspark/prod/"
+    s3PysparkConfigBucket_prod:  "s3://lfg-620962404398-glue-config-ue1-bucket001/pyspark/prod/"
+    s3PysparkInputBucket_prod:   "s3://lfg-620962404398-glue-input-ue1-bucket001/pyspark/prod/"
+
+
+code-coverage:
+  rules:
+  - when: never
+
+sonarqube:
+  needs:
+    #- code-coverage
+    - OWASP
